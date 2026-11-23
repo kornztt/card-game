@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ember Court — an elemental card duel</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="table">
+  <div id="felt"></div>
+
+  <!-- Opponent area -->
+  <div id="opponent-area">
+    <div id="opponent-info">
+      <div class="portrait" id="opponent-portrait" aria-hidden="true">♜</div>
+      <div class="fighter-name">Ashen Warden</div>
+      <div class="life-wrap">
+        <div class="life-bar"><div class="life-fill" id="opponent-life-fill"></div></div>
+        <div class="life-text"><span id="opponent-life">30</span> / 30 <span class="shield" id="opponent-shield"></span></div>
+      </div>
+      <div class="deck-count" id="opponent-deck">Deck 20</div>
+    </div>
+    <div id="opponent-hand" aria-label="Opponent hand"></div>
+  </div>
+
+  <!-- Center battlefield -->
+  <div id="battlefield">
+    <div id="turn-banner">Your turn</div>
+    <div id="log" aria-live="polite"></div>
+    <div id="float-layer"></div>
+  </div>
+
+  <!-- Player area -->
+  <div id="player-area">
+    <div id="player-hand" aria-label="Your hand"></div>
+    <div id="player-info">
+      <div class="portrait" id="player-portrait" aria-hidden="true">♞</div>
+      <div class="fighter-name">You · Ember Knight</div>
+      <div class="life-wrap">
+        <div class="life-bar"><div class="life-fill" id="player-life-fill"></div></div>
+        <div class="life-text"><span id="player-life">30</span> / 30 <span class="shield" id="player-shield"></span></div>
+      </div>
+      <div class="deck-count" id="player-deck">Deck 20</div>
+      <div id="energy"><span class="energy-label">Energy</span><span id="energy-orbs"></span></div>
+      <div id="score-line">Score <b id="score">0</b> · Best <b id="best-score">0</b></div>
+    </div>
+  </div>
+
+  <!-- Controls -->
+  <div id="controls">
+    <button id="end-turn" class="btn">End Turn</button>
+    <button id="mute-btn" class="btn small" title="Mute (M)">♪ On</button>
+    <button id="help-btn" class="btn small" title="How to play (H)">?</button>
+    <div id="turn-label">Turn 1</div>
+  </div>
+
+  <!-- Title screen -->
+  <div id="title-screen" class="overlay">
+    <div class="panel">
+      <div class="game-title">EMBER COURT</div>
+      <div class="game-subtitle">An elemental card duel</div>
+      <p class="tagline">Four elements. One throne. Outplay the Ashen Warden before your embers fade.</p>
+      <button id="play-btn" class="btn big">▶ Play</button>
+      <div class="best-line">Best score: <b id="title-best">0</b></div>
+      <div class="rules">
+        <div><span class="el-dot flame"></span> Flame beats Leaf</div>
+        <div><span class="el-dot leaf"></span> Leaf beats Stone</div>
+        <div><span class="el-dot stone"></span> Stone beats Tide</div>
+        <div><span class="el-dot tide"></span> Tide beats Flame</div>
+        <div class="rules-note">Advantage deals +2 damage. Guard blocks damage. Siphon hits and draws a card.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- How to play -->
+  <div id="help-screen" class="overlay hidden">
+    <div class="panel small-panel">
+      <h2>How to play</h2>
+      <ul>
+        <li>Click a card, then click the enemy to strike — or click a Guard card to shield yourself.</li>
+        <li>Each card costs energy. Energy refills every turn and grows by 1 (up to 6).</li>
+        <li>Flame &gt; Leaf &gt; Stone &gt; Tide &gt; Flame: an advantaged strike deals +2 damage.</li>
+        <li>Reduce the Warden to 0 life to win. If your life hits 0, you lose.</li>
+        <li>Keys: <b>1–7</b> select a card, <b>Enter</b> end turn, <b>M</b> mute, <b>H</b> help, <b>Esc</b> pause.</li>
+      </ul>
+      <button id="help-close" class="btn">Close</button>
+    </div>
+  </div>
+
+  <!-- Win screen -->
+  <div id="win-screen" class="overlay hidden">
+    <div class="panel">
+      <div class="end-title win">👑 VICTORY</div>
+      <p class="end-text">The Ashen Warden kneels. The Ember Court is yours.</p>
+      <div class="end-stats" id="win-stats"></div>
+      <button id="win-again" class="btn big">Play Again</button>
+    </div>
+  </div>
+
+  <!-- Loss screen -->
+  <div id="loss-screen" class="overlay hidden">
+    <div class="panel">
+      <div class="end-title loss">💀 DEFEAT</div>
+      <p class="end-text">Your embers fade. The Warden keeps the throne… this time.</p>
+      <div class="end-stats" id="loss-stats"></div>
+      <button id="loss-again" class="btn big">Try Again</button>
+    </div>
+  </div>
+
+  <!-- Pause screen -->
+  <div id="pause-screen" class="overlay hidden">
+    <div class="panel small-panel">
+      <h2>Paused</h2>
+      <p>Take a breath. The court waits.</p>
+      <button id="resume-btn" class="btn big">Resume</button>
+    </div>
+  </div>
+</div>
+<script src="js/cards.js"></script>
+<script src="js/ai.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/render.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
